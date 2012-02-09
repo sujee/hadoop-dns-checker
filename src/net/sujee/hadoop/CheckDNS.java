@@ -8,8 +8,6 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.hadoop.net.DNS;
-
 public class CheckDNS
 {
 
@@ -66,7 +64,8 @@ public class CheckDNS
                         System.out.println ("   is reachable : *** no ***");
                     
                 }
-            }
+                System.out.println ("");
+            } // end for loop on hosts
         }
     }
     
