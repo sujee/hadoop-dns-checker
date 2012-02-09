@@ -1,0 +1,4 @@
+*.class
+*.jar
+.DS_Store
+*.swp
