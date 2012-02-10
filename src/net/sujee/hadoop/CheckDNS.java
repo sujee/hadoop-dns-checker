@@ -8,12 +8,15 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * check dns and reverse dns of hosts in a given file
+ * 
+ * @author sujee@sujee.net
+ *
+ */
 public class CheckDNS
 {
 
-    /**
-     * @param args
-     */
     public static void main(String[] args) throws Exception
     {
         if (args.length < 1)
@@ -50,7 +53,10 @@ public class CheckDNS
                     {
                         InetAddress revHost = InetAddress.getByAddress(inet.getAddress());
                         String revHostName = revHost.getHostName();
-                        System.out.println ("   reverse lookup : success (" + revHostName + ")");
+                        if (host.equals(revHostName))
+                            System.out.println ("   reverse lookup : success (" + revHostName + ")");
+                        else
+                            System.out.println ("   reverse lookup : ***failed*** (" + revHostName + " != " + host + " (expected) )");
                     }
                     catch (UnknownHostException e)
                     {
