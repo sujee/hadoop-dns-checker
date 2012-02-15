@@ -18,11 +18,17 @@ public class CheckDNS {
 
 	public static void main(String[] args) throws Exception {
 
-		InetAddress localhost = InetAddress.getLocalHost();
-		System.out.println("==== Running on : " + localhost + " =====");
 		System.out.println("# self check...");
-		checkHost(localhost.getHostName());
+		InetAddress inet = checkHost(null);
 		System.out.println("# end self check\n");
+		
+        if (args.length > 0)
+        {
+            if (inet != null)
+                System.out.println("==== Running on : " + inet + " =====");
+            else
+                System.out.println("==== Running on : unknown host =====");
+        }
 		
 		for (String s : args) {
 			String[] hosts = readLinesFromFile(s, true);
@@ -33,12 +39,21 @@ public class CheckDNS {
 		}
 	}
 
-	public static void checkHost(String host) {
-		System.out.println("-- host : " + host);
+	public static InetAddress checkHost(String host) {
+		if (host != null)
+			System.out.println("-- host : " + host);
+		else
+			System.out.println("-- host : localhost (myself)");
 
 		InetAddress inet = null;
 		try {
-			inet = InetAddress.getByName(host);
+			if (host != null)
+				inet = InetAddress.getByName(host);
+			else
+            {
+				inet = InetAddress.getLocalHost();
+                host = inet.getHostName();
+            }
 			String ip = inet.getHostAddress();
 			System.out.println("   host lookup : success (" + ip + ")");
 		} catch (UnknownHostException e) {
@@ -73,7 +88,7 @@ public class CheckDNS {
 			}
 
 		}
-		
+		return inet;
 	}
 
 	public static String[] readLinesFromFile(String fileName,
