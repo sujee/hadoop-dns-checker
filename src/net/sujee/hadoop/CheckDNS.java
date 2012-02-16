@@ -42,8 +42,6 @@ public class CheckDNS {
 	public static InetAddress checkHost(String host) {
 		if (host != null)
 			System.out.println("-- host : " + host);
-		else
-			System.out.println("-- host : localhost (myself)");
 
 		InetAddress inet = null;
 		try {
@@ -53,6 +51,7 @@ public class CheckDNS {
             {
 				inet = InetAddress.getLocalHost();
                 host = inet.getHostName();
+                System.out.println("-- host : " + host);
             }
 			String ip = inet.getHostAddress();
 			System.out.println("   host lookup : success (" + ip + ")");
