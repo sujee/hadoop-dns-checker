@@ -1,5 +1,4 @@
 #!/bin/bash
 
-java -cp a.jar net.sujee.hadoop.CheckDNS $*
-
+java -cp checkDNS.jar net.sujee.hadoop.CheckDNSJNDI $*
 

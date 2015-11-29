@@ -1,3 +1,20 @@
+######Forked from  sujee/hadoop-dns-checker . Credits to original author for the base code.
+
+We noticed that some parts of `hadoop/hbase` uses JNDI for DNS lookups, which doesn't really respect the OS DNS 
+configuration.
+
+The most noticeable symptom : 
+`Cannot resolve the host name for <host>/<ip> because of javax.naming
+.CommunicationException: 
+DNS error [Root exception is java.net.SocketTimeoutException: Receive timed out]; remaining name '<ip>.in-addr.arpa'`
+
+I have hacked together the `hadoop` DNS code to this utility. (I needed to quickly verify our issues with DNS , So
+didnt care much about the code hygiene)
+It will give a reasonable idea if the infrastructure is
+ `hadoop` friendly.
+
+## Original readme content follows ##
+
 Hadoop is picky about DNS (and reverse DNS!)
 Every node in the cluster has to have DNS working properly.
 
